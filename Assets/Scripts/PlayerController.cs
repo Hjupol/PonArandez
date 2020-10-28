@@ -126,7 +126,10 @@ public class PlayerController : MonoBehaviour
                 break;
             case PowerUpType.None:
                 //Asingación de color segun power up
-                impulseForce = initialImpulseForce;
+                if (impulseForce > initialImpulseForce)
+                {
+                    impulseForce = initialImpulseForce;
+                }
                 rb.gravityScale = 1;
                 this.gameObject.tag = "Player";
 
@@ -161,6 +164,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCollisionExit(Collision collision)
+    {
+        
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -169,6 +176,15 @@ public class PlayerController : MonoBehaviour
             jumpCounter = 2;
         }
 
+        if (collision.gameObject.layer == 9)
+        {
+            jumpCounter = 2;
+            impulseForce = halfImpulseForce;
+        }
+        else
+        {
+            impulseForce = initialImpulseForce;
+        }
         //if (collision.gameObject.CompareTag("Coin"))
         //{
         //    BinaryPersistanceManager.totalCoins++;
@@ -234,7 +250,7 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.layer == 9)
         {
-            jumpCounter = 1;
+            jumpCounter = 2;
             impulseForce = halfImpulseForce;
         }
         else
