@@ -90,6 +90,7 @@ public class PauseManager : MonoBehaviour
         AudioManager.instance.PauseSound("Music");
         pauseOn = false;
         BinaryPersistanceManager.SaveScore(BinaryPersistanceManager.totalCoins);
+        BinaryPersistanceManager.ResetScore();
         SceneManager.LoadScene(0);
     }
 
@@ -98,6 +99,7 @@ public class PauseManager : MonoBehaviour
         AudioManager.instance.PlaySound("Button");
 
         BinaryPersistanceManager.SaveScore(BinaryPersistanceManager.totalCoins);
+        BinaryPersistanceManager.ResetScore();
         Application.Quit();
     }
 }

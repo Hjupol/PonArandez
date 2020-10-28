@@ -23,10 +23,13 @@ public class PlayerController : MonoBehaviour
     public float powerUpTimer = 5;
     private float initialPowerUpTimer = 5;
 
-    public Sprite solidSprite, liquidSprite, gasSprite, normalSprite;
+    public GameObject solidSprite, liquidSprite, gasSprite;
+    
     private SpriteRenderer spriteRenderer;
 
     private int jumpCounter;
+
+    public Animator animator;
 
     
 
@@ -46,12 +49,15 @@ public class PlayerController : MonoBehaviour
         AudioManager.instance.PlaySound("Music");
 
 
+
     }
 
     void Update()
     {
         if (rb !=null && !PauseManager.pauseOn &&!WinCondition.winCondition)
         {
+
+            
             if (powerUpActive)
             {
                 powerUpTimer-=Time.deltaTime;
@@ -70,6 +76,10 @@ public class PlayerController : MonoBehaviour
         }
         if (jumpCounter > 2)
             jumpCounter = 2;
+
+        animator.SetFloat("RightVelocity", rb.velocity.x);
+        animator.SetFloat("UpVelocity", rb.velocity.y);
+
     }
 
     private void FixedUpdate()
@@ -99,19 +109,19 @@ public class PlayerController : MonoBehaviour
         {
             case PowerUpType.Solid:
                 this.gameObject.tag = "Solid";
-                spriteRenderer.sprite = solidSprite;
+                solidSprite.SetActive(true);
                 //Asingación de color segun power up
                 break;
             case PowerUpType.Liquid:
                 //Asingación de color segun power up
                 impulseForce = doubleImpulseForce;
-                spriteRenderer.sprite = liquidSprite;
+                liquidSprite.SetActive(true);
 
                 break;
             case PowerUpType.Gas:
                 rb.gravityScale = 0;
                 //Asingación de color segun power up
-                spriteRenderer.sprite = gasSprite;
+                gasSprite.SetActive(true);
 
                 break;
             case PowerUpType.None:
@@ -119,7 +129,16 @@ public class PlayerController : MonoBehaviour
                 impulseForce = initialImpulseForce;
                 rb.gravityScale = 1;
                 this.gameObject.tag = "Player";
-                spriteRenderer.sprite = normalSprite;
+
+                if(gasSprite.activeInHierarchy)
+                    gasSprite.SetActive(false);
+
+                if(solidSprite.activeInHierarchy)
+                    solidSprite.SetActive(false);
+
+                if(liquidSprite.activeInHierarchy)
+                    liquidSprite.SetActive(false);
+
 
                 break;
             default:

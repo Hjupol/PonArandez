@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5474262817219339428}
   - component: {fileID: 5474262817219339431}
   m_Layer: 8
-  m_Name: Plataform (4) 1
+  m_Name: Plataform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b209cc56651866b46807beae505b1117, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 68b8b9f270419944d9aab960c70ef860, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,16 +95,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.096035, y: -1.8100364}
+  m_Offset: {x: 0.016612053, y: 0.068697214}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 20.48, y: 10.24}
+    oldSize: {x: 40.96, y: 20.48}
     newSize: {x: 32, y: 32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20.28363, y: 6.6605573}
+  m_Size: {x: 21.077879, y: 6.568914}
   m_EdgeRadius: 0
