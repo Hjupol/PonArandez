@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     public GameObject tittleMenu;
+    public GameObject levelsMenu;
     public GameObject creditsMenu;
     public GameObject referencesMenu;
 
@@ -24,6 +25,10 @@ public class MenuManager : MonoBehaviour
         {
             referencesMenu.SetActive(false);
         }
+        if (levelsMenu.activeInHierarchy)
+        {
+            levelsMenu.SetActive(false);
+        }
         tittleMenu.SetActive(true);
     }
 
@@ -33,6 +38,13 @@ public class MenuManager : MonoBehaviour
         AudioManager.instance.PlaySound("Button");
         tittleMenu.SetActive(false);
         creditsMenu.SetActive(true);
+    }
+
+    public void GoLevelsMenu()
+    {
+        AudioManager.instance.PlaySound("Button");
+        tittleMenu.SetActive(false);
+        levelsMenu.SetActive(true);
     }
 
     public void GoReferenceMenu()
