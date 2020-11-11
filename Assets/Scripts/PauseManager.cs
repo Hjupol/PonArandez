@@ -62,7 +62,7 @@ public class PauseManager : MonoBehaviour
     {
         AudioManager.instance.PlaySound("Button");
         pauseOn = false;
-        BinaryPersistanceManager.SaveScore(BinaryPersistanceManager.totalCoins);
+        //BinaryPersistanceManager.SaveScore(BinaryPersistanceManager.totalCoins[SceneManager.GetActiveScene().buildIndex]);
         BinaryPersistanceManager.ResetScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
@@ -89,7 +89,7 @@ public class PauseManager : MonoBehaviour
         AudioManager.instance.PlaySound("Button");
         AudioManager.instance.PauseSound("Music");
         pauseOn = false;
-        BinaryPersistanceManager.SaveScore(BinaryPersistanceManager.totalCoins);
+        //BinaryPersistanceManager.SaveScore(BinaryPersistanceManager.totalCoins);
         BinaryPersistanceManager.ResetScore();
         SceneManager.LoadScene(0);
     }
@@ -98,7 +98,7 @@ public class PauseManager : MonoBehaviour
     {
         AudioManager.instance.PlaySound("Button");
 
-        BinaryPersistanceManager.SaveScore(BinaryPersistanceManager.totalCoins);
+        //BinaryPersistanceManager.SaveScore(BinaryPersistanceManager.totalCoins);
         BinaryPersistanceManager.ResetScore();
         Application.Quit();
     }

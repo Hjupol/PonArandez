@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Coin : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Coin : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Solid"))
         {
             AudioManager.instance.PlaySound("GetCoin");
-            BinaryPersistanceManager.totalCoins++;
+            BinaryPersistanceManager.totalCoins[SceneManager.GetActiveScene().buildIndex]++;
             this.gameObject.SetActive(false);
             Destroy(this);
         }

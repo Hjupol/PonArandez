@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GUIController : MonoBehaviour
@@ -22,8 +23,9 @@ public class GUIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        coinsText.text = BinaryPersistanceManager.totalCoins.ToString();
+        //Debug.Log(SceneManager.GetActiveScene().buildIndex.ToString());
+        coinsText.text = BinaryPersistanceManager.totalCoins[SceneManager.GetActiveScene().buildIndex].ToString();
+
         if (PlayerController.hasPowerUp)
         {
             powButton.gameObject.SetActive(true);

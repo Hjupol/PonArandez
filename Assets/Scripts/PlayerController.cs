@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -199,6 +200,7 @@ public class PlayerController : MonoBehaviour
                 AudioManager.instance.PlaySound("Destroyed");
 
                 Destroy(_insParticles, 2);
+                BinaryPersistanceManager.SaveScore(BinaryPersistanceManager.totalCoins[SceneManager.GetActiveScene().buildIndex]);
                 this.gameObject.SetActive(false);
                 Destroy(rb);
             }
@@ -209,6 +211,7 @@ public class PlayerController : MonoBehaviour
                 AudioManager.instance.PlaySound("Destroyed");
 
                 Destroy(_insParticles, 2);
+                BinaryPersistanceManager.SaveScore(BinaryPersistanceManager.totalCoins[SceneManager.GetActiveScene().buildIndex]);
 
                 this.gameObject.SetActive(false);
                 Destroy(rb);
@@ -263,6 +266,8 @@ public class PlayerController : MonoBehaviour
             ParticleSystem _insParticles = Instantiate(particles, this.transform.position, Quaternion.identity);
 
             Destroy(_insParticles, 2);
+            BinaryPersistanceManager.SaveScore(BinaryPersistanceManager.totalCoins[SceneManager.GetActiveScene().buildIndex]);
+
             this.gameObject.SetActive(false);
             Destroy(rb);
         }
