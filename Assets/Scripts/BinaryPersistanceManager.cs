@@ -36,8 +36,9 @@ public class BinaryPersistanceManager : MonoBehaviour
         {
             maxCoins[actualScene] = score;
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream stream = new FileStream(Application.persistentDataPath + "/playersave.sav", FileMode.Create);
-            MaxScore data = new MaxScore(score);
+            FileStream stream = new FileStream(Application.persistentDataPath + "/playersavedatas.sav", FileMode.Create);
+
+            MaxScore data = new MaxScore(maxCoins);
             bf.Serialize(stream, data);
             stream.Close();
         }
@@ -46,18 +47,33 @@ public class BinaryPersistanceManager : MonoBehaviour
 
     public static int[] LoadScore()
     {
-        if (File.Exists(Application.persistentDataPath + "/playersave.sav"))
+        if (File.Exists(Application.persistentDataPath + "/playersavedatas.sav"))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream stream = new FileStream(Application.persistentDataPath + "/playersave.sav", FileMode.Open);
+            FileStream stream = new FileStream(Application.persistentDataPath + "/playersavedatas.sav", FileMode.Open);
             MaxScore data = bf.Deserialize(stream) as MaxScore;
             stream.Close();
             return data._data;
+            //if (stream.Length != 0)
+            //{
+            //    MaxScore data = bf.Deserialize(stream) as MaxScore;
+            //    stream.Close();
+            //    return data._data;
+
+            //}
+            //else
+            //{
+            //    int[] data = new int[SceneManager.sceneCountInBuildSettings];
+            //    stream.Close();
+            //    return data;
+            //}
         }
         else
         {
-            FileStream stream = new FileStream(Application.persistentDataPath + "/playersave.sav", FileMode.Create);
-            return new int[SceneManager.sceneCount];
+            FileStream stream = new FileStream(Application.persistentDataPath + "/playersavedatas.sav", FileMode.Create);
+
+            return new int[SceneManager.sceneCountInBuildSettings];
+            
         }
     }
 }
@@ -65,15 +81,15 @@ public class BinaryPersistanceManager : MonoBehaviour
 [Serializable]
 public class MaxScore
 {
-    public int[] _data;
+    public int[] _data = new int[SceneManager.sceneCountInBuildSettings];
 
-    public MaxScore(int points)
+    public MaxScore(int[] points)
     {
         Debug.Log(points);
         
-        if (_data[SceneManager.GetActiveScene().buildIndex] < points)
+        if (_data[SceneManager.GetActiveScene().buildIndex] < points[SceneManager.GetActiveScene().buildIndex])
         {
-            _data[SceneManager.GetActiveScene().buildIndex] = points;
+            _data = points;
         }
     }
 }
