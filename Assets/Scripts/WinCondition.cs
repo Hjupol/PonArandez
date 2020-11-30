@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class WinCondition : MonoBehaviour
@@ -28,7 +29,9 @@ public class WinCondition : MonoBehaviour
             winCondition = true;
             Time.timeScale = 0;
             winPanel.SetActive(true);
-            coinsText.text = "Coins collected: "+ BinaryPersistanceManager.totalCoins.ToString();
+            BinaryPersistanceManager.SaveScore(BinaryPersistanceManager.totalCoins[SceneManager.GetActiveScene().buildIndex]);
+
+            coinsText.text = "Coins collected: "+ BinaryPersistanceManager.totalCoins[SceneManager.GetActiveScene().buildIndex].ToString();
             pauseButton.SetActive(false);
         }
     }

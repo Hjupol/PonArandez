@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -8,10 +9,12 @@ public class MenuManager : MonoBehaviour
     public GameObject levelsMenu;
     public GameObject creditsMenu;
     public GameObject referencesMenu;
-
+    public GameObject loadingScreen;
 
     public Text level1MaxSeeds;
     public Text level2MaxSeeds;
+
+    public Slider slider;
 
     private void Start()
     {
@@ -68,16 +71,33 @@ public class MenuManager : MonoBehaviour
     {
         AudioManager.instance.PlaySound("Button");
         AudioManager.instance.PauseSound("MenuMusic");
-        SceneManager.LoadScene(1);
+        LoadLevel(1);
     }
 
     public void PlayLevel2()
     {
         AudioManager.instance.PlaySound("Button");
         AudioManager.instance.PauseSound("MenuMusic");
-        SceneManager.LoadScene(2);
+        LoadLevel(2);
     }
 
+    public void LoadLevel(int sceneIndex)
+    {
+        StartCoroutine(LoadAsync(sceneIndex));
+    }
+
+    IEnumerator LoadAsync(int sceneIndex)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+
+        loadingScreen.SetActive(true);
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+            //slider.value = progress;
+            yield return null; 
+        }
+    }
 
     public void Quit()
     {
