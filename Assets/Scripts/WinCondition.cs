@@ -31,7 +31,7 @@ public class WinCondition : MonoBehaviour
             winPanel.SetActive(true);
             BinaryPersistanceManager.SaveScore(BinaryPersistanceManager.totalCoins[SceneManager.GetActiveScene().buildIndex]);
 
-            coinsText.text = "Coins collected: "+ BinaryPersistanceManager.totalCoins[SceneManager.GetActiveScene().buildIndex].ToString();
+            coinsText.text = "Seeds collected: "+ BinaryPersistanceManager.totalCoins[SceneManager.GetActiveScene().buildIndex].ToString();
             pauseButton.SetActive(false);
         }
     }
